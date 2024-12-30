@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <typeinfo>
 
 #include "ConfigReader.hpp"
 
@@ -99,6 +100,5 @@ int main(int argc, char* argv[]) {
   for (const auto& portal : reader.getPortalConfigs()) {
     printPortalConfig(portal);
   }
-
   return 0;
 }
