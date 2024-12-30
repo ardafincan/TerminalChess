@@ -1,5 +1,6 @@
 #include "../include/MoveValidator.hpp"
 
+MoveValidator::MoveValidator(ChessBoard* chessBoard) : chessBoard(*chessBoard){};
 
 bool MoveValidator::isMoveValid(Position source, Position target){
         int side_diff = abs(target.x - source.x);
@@ -23,57 +24,72 @@ bool MoveValidator::isMoveValid(Position source, Position target){
         if((side_diff == 2 && vertical_diff == 1) || (side_diff == 1 && vertical_diff == 2)){
             return (chessBoard.board.at(source).movement.l_shape);
         }
-
+        return true;
     }
 
 bool MoveValidator::isPathValid(Position source, Position target){
     int side_diff = abs(target.x - source.x);
     int vertical_diff = abs(target.y - source.y);
 
+    int start_point = 0;
+    int end_point = 0;
+
     if(side_diff == 0){
         if(target.y > source.y){
-            for(int i = source.y; i < target.y; i++){
-                Position checkPos;
-                checkPos.x = source.x;
-                checkPos.y = i;
-                if(chessBoard.board.contains(checkPos)){
-                    return false;
-                }
-            }
+            end_point = target.y;
+            start_point = source.y;
         }else if(source.y > target.y){
-            for(int i = target.y; i < source.y; i++){
-                Position checkPos;
-                checkPos.x = source.x;
-                checkPos.y = i;
-                if(chessBoard.board.contains(checkPos)){
-                    return false;
-                }
+            end_point = source.y;
+            start_point = target.y;
+        }
+        for(int i = start_point; i < end_point; i++){
+            Position checkPos;
+            checkPos.x = source.x;
+            checkPos.y = i;
+            if(chessBoard.board.contains(checkPos)){
+                return false;
             }
         }
     }
+    
     if(vertical_diff == 0){
         if(target.x > source.x){
-            for(int i = source.x; i < target.x; i++){
+            end_point = target.x;
+            start_point = source.x;
+        }else if(source.x > target.x){
+            end_point = source.x;
+            start_point = target.x;
+        }
+        for(int i = start_point; i < end_point; i++){
+            Position checkPos;
+            checkPos.x = i;
+            checkPos.y = source.y;
+            if(chessBoard.board.contains(checkPos)){
+                return false;
+            }
+        }
+    }
+    if(side_diff == vertical_diff){
+        if(target.x > source.x){
+            for(int i = 0; source.x + i < target.x; i++){
                 Position checkPos;
-                checkPos.x = i;
-                checkPos.y = source.y;
+                checkPos.x = source.x + i;
+                checkPos.y = source.y + i;
                 if(chessBoard.board.contains(checkPos)){
                     return false;
                 }
             }
         }else if(source.x > target.x){
-            for(int i = target.x; i < source.x; i++){
+            for(int i = 0; target.x + i < source.x; i++){
                 Position checkPos;
-                checkPos.x = i;
-                checkPos.y = source.y;
+                checkPos.x = target.x + i;
+                checkPos.y = target.y + i;
                 if(chessBoard.board.contains(checkPos)){
                     return false;
                 }
             }
         }
     }
-    if( )
-
-
+    return true;
 }
     

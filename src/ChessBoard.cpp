@@ -19,9 +19,9 @@
     };
 
     bool ChessBoard::movePiece(Position source, Position target){
-        //implement here if condition checking if piece can move that way 
+        MoveValidator validator(this);
         
-        if(!isMoveValid(source, target)){
+        if(!validator.isMoveValid(source, target)){
             return false;
         }
 

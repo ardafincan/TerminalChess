@@ -19,8 +19,8 @@ class ChessBoard {
     std::unordered_map<Position, Piece> board; 
 
     ChessBoard(PieceConfig pieceConfig, char* argv[]);
-    bool isMoveValid(Position source, Position target);
     bool movePiece(Position source, Position target);
+    bool capturePiece(Position source, Position target);
     void printBoardStatus();
 
 };

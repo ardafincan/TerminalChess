@@ -4,11 +4,14 @@
 
 class MoveValidator {
     public: 
-    MoveValidator(ChessBoard board);
+    MoveValidator(ChessBoard* board);
 
     ChessBoard chessBoard;
 
     bool isMoveValid(Position source, Position target);
     bool isPathValid(Position source, Position target);
     bool isTeleportValid();
+
+    private: 
+        ChessBoard* board;
 };
