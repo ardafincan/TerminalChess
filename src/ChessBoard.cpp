@@ -1,5 +1,6 @@
 #include "../include/ChessBoard.hpp"
 #include "../include/ConfigReader.hpp"
+#include "../include/MoveValidator.hpp"
 
     ChessBoard::ChessBoard(PieceConfig pieceConfig, char* argv[]) {
         ConfigReader reader(argv[1]);
@@ -17,11 +18,19 @@
         }
     };
 
-    // void ChessBoard::movePiece(Position source, Position target){
-    //     //implement here if condition checking if piece can move that way 
-    //     //implement here if condition checking if source exists and target position is within chess board
-    //         if(!board.contains(target)){
-    //             board.insert(std::make_pair(source, board.at(source)));
-    //             board.erase(source);
-    //         }
-    // }
+    bool ChessBoard::movePiece(Position source, Position target){
+        //implement here if condition checking if piece can move that way 
+        
+        if(!isMoveValid(source, target)){
+            return false;
+        }
+
+        if(!board.at(source).hasMoved){
+            board.at(source).hasMoved = true;
+        }
+        //implement here if condition checking if source exists and target position is within chess board
+            if(!board.contains(target)){
+                board.insert(std::make_pair(source, board.at(source)));
+                board.erase(source);
+            }
+    };

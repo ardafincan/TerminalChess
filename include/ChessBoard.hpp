@@ -1,13 +1,17 @@
+#pragma once 
+
 #include "../include/ConfigReader.hpp"
 #include <vector>
 #include <string>
 #include <unordered_map>
 
 
+
 struct Piece{
     std::string type;
     std::string color;
     MovementRules movement;
+    bool hasMoved = false;
 };
 
 class ChessBoard {
@@ -15,7 +19,8 @@ class ChessBoard {
     std::unordered_map<Position, Piece> board; 
 
     ChessBoard(PieceConfig pieceConfig, char* argv[]);
-    void movePiece(Position source, Position target);
+    bool isMoveValid(Position source, Position target);
+    bool movePiece(Position source, Position target);
     void printBoardStatus();
 
 };
