@@ -11,7 +11,21 @@
 struct Position {
   int x;
   int y;
+
+  bool operator==(const Position& other) const {
+        return x == other.x && y == other.y;}
+  
 };
+
+namespace std {
+    template<>
+    struct hash<Position> {
+        size_t operator()(const Position& pos) const {
+            return hash<int>()(pos.x) ^ 
+                   (hash<int>()(pos.y) << 1);
+        }
+    };
+}
 
 /**
  * @brief Structure to hold movement rules for a piece
