@@ -1,6 +1,7 @@
 #include "../include/MoveValidator.hpp"
 
-MoveValidator::MoveValidator(ChessBoard* chessBoard) : chessBoard(*chessBoard){};
+MoveValidator::MoveValidator(ChessBoard* board)
+    : chessBoard(*board), board(board) {};
 
 bool MoveValidator::isMoveValid(Position source, Position target){
         int side_diff = abs(target.x - source.x);

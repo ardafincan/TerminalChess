@@ -1,9 +1,11 @@
 #pragma once 
 
 #include "../include/ConfigReader.hpp"
+#include "../include/MoveValidator.hpp"
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <iostream>
 
 
 
@@ -18,7 +20,7 @@ class ChessBoard {
     public: 
     std::unordered_map<Position, Piece> board; 
 
-    ChessBoard(PieceConfig pieceConfig, char* argv[]);
+    ChessBoard(std::vector<PieceConfig> pieceConfigs);
     bool movePiece(Position source, Position target);
     bool capturePiece(Position source, Position target);
     void printBoardStatus();

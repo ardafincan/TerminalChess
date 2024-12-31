@@ -1,19 +1,19 @@
 #include "../include/ChessBoard.hpp"
-#include "../include/ConfigReader.hpp"
-#include "../include/MoveValidator.hpp"
 
-    ChessBoard::ChessBoard(PieceConfig pieceConfig, char* argv[]) {
-        ConfigReader reader(argv[1]);
-        
-        for(int i = 0; i < reader.getPieceConfigs().size(); i++){
+    ChessBoard::ChessBoard(std::vector<PieceConfig> pieceConfigs) {
+
+        for(int j = 0; j < pieceConfigs.size(); j++){
+            PieceConfig pieceConfig = pieceConfigs[j];
+            std::string white = "White";
+            std::string black = "Black";
 
             for(int i = 0; i < pieceConfig.white_positions.size(); i++){
-                Piece piece = {pieceConfig.type, "white", pieceConfig.movement};
+                Piece piece = {pieceConfig.type, white, pieceConfig.movement};
                 board.insert(std::make_pair(pieceConfig.white_positions[i], piece));
             }
             for(int i = 0; i < pieceConfig.black_positions.size(); i++){
-                Piece piece = {pieceConfig.type, "black", pieceConfig.movement};
-                board.insert(std::make_pair(pieceConfig.white_positions[i], piece));
+                Piece piece = {pieceConfig.type, black, pieceConfig.movement};
+                board.insert(std::make_pair(pieceConfig.black_positions[i], piece));
             }
         }
     };
@@ -39,5 +39,71 @@
     };
 
     bool ChessBoard::capturePiece(Position source, Position target){
-        
+        return true;
+    };
+
+    void ChessBoard::printBoardStatus(){
+        std::cout << "+---+---+---+---+---+---+---+---+" << std::endl;
+        for (int row = 7; row >= 0; row--) {
+            // Print pieces row
+            std::cout << "|";
+            for (int col = 0; col < 8; col++) {
+
+                std::cout << " ";
+                // Here you can add logic to print pieces
+                Position checkPos;
+                checkPos.x = col;
+                checkPos.y = row;
+                if(board.contains(checkPos)){
+                    if (board.at(checkPos).type == "Pawn") {
+                        if (board.at(checkPos).color == "White") {
+                            std::cout << "P";
+                        } else {
+                            std::cout << "p";
+                        }
+                    } else if (board.at(checkPos).type == "Rook") {
+                        if (board.at(checkPos).color == "White") {
+                            std::cout << "R";
+                        } else {
+                            std::cout << "r";
+                        }
+                    } else if (board.at(checkPos).type == "Knight") {
+                        if (board.at(checkPos).color == "White") {
+                            std::cout << "N";
+                        } else {
+                            std::cout << "n";
+                        }
+                    } else if (board.at(checkPos).type == "Bishop") {
+                        if (board.at(checkPos).color == "White") {
+                            std::cout << "B";
+                        } else {
+                            std::cout << "b";
+                        }
+                    }else if (board.at(checkPos).type == "Queen") {
+                        if (board.at(checkPos).color == "White") {
+                            std::cout << "Q";
+                        } else {
+                            std::cout << "q";
+                        }
+                    }else if (board.at(checkPos).type == "King") {
+                        if (board.at(checkPos).color == "White") {
+                            std::cout << "K";
+                        } else {
+                            std::cout << "k";
+                        }
+                    }
+                }else std::cout << " ";
+                std::cout << " ";
+                std::cout << "|";
+            }
+            std::cout << " " << row << std::endl;
+            
+            // Print horizontal border
+            std::cout << "+---+---+---+---+---+---+---+---+";
+            if (row > 0) std::cout << std::endl;
+        }
+    
+        // Print column labels
+        std::cout << std::endl;
+        std::cout << "  0   1   2   3   4   5   6   7" << std::endl;
     };

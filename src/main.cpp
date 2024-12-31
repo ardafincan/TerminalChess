@@ -4,6 +4,8 @@
 #include <typeinfo>
 
 #include "ConfigReader.hpp"
+#include "ChessBoard.hpp"
+#include "MoveValidator.hpp"
 
 // Helper function to print positions
 void printPosition(const Position& pos) {
@@ -100,5 +102,11 @@ int main(int argc, char* argv[]) {
   for (const auto& portal : reader.getPortalConfigs()) {
     printPortalConfig(portal);
   }
+
+  ChessBoard gameBoard(reader.getPieceConfigs());
+
+  std::cout << "\n==== Chess Table ==== \n\n";
+  gameBoard.printBoardStatus();
+
   return 0;
 }

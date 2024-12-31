@@ -1,12 +1,13 @@
 #pragma once
 
 #include "ChessBoard.hpp"
+#include "ConfigReader.hpp"
+
+class ChessBoard;
 
 class MoveValidator {
     public: 
-    MoveValidator(ChessBoard* board);
-
-    ChessBoard chessBoard;
+    explicit MoveValidator(ChessBoard* board);
 
     bool isMoveValid(Position source, Position target);
     bool isPathValid(Position source, Position target);
@@ -14,4 +15,5 @@ class MoveValidator {
 
     private: 
         ChessBoard* board;
+        ChessBoard& chessBoard;
 };
