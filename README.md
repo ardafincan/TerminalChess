@@ -1,5 +1,5 @@
-# Fantasy Chess 
+# Chess 2.0
 
-This project is being made for my "Data Structres" class term project.
+This project is a terminal chess game made with C++. 
 
 ###  ***Currently on development phase.***

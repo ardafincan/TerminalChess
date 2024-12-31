@@ -29,7 +29,7 @@
         }
         //implement here if condition checking if source exists and target position is within chess board
         if(!board.contains(target)){
-            board.insert(std::make_pair(source, board.at(source)));
+            board.insert(std::make_pair(target, board.at(source)));
             board.erase(source);
         }else if(board.at(target).color == board.at(source).color){
             return false;
@@ -39,7 +39,8 @@
     };
 
     bool ChessBoard::capturePiece(Position source, Position target){
-        return true;
+        board.at(target) = board.at(source);
+        board.erase(source);
     };
 
     void ChessBoard::printBoardStatus(){
@@ -107,3 +108,23 @@
         std::cout << std::endl;
         std::cout << "  0   1   2   3   4   5   6   7" << std::endl;
     };
+
+    std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color = "all"){
+        std::vector<Position> positions;
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 7; j++){
+                Position position;
+                position.x = j;
+                position.y = i;
+                if(color == "all"){
+                    if(board.at(position).type == pieceType){
+                        positions.push_back(position);
+                    }
+                }else{
+                    if(board.at(position).type == pieceType && board.at(position).color == color){
+                        positions.push_back(position);
+                    }
+                }
+            }
+        }
+    }
