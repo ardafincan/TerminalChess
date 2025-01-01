@@ -109,7 +109,7 @@
         std::cout << "  0   1   2   3   4   5   6   7" << std::endl;
     };
 
-    std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color = "all"){
+    std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color){
         std::vector<Position> positions;
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
@@ -127,4 +127,4 @@
                 }
             }
         }
-    }
+    };

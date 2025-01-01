@@ -22,7 +22,7 @@ class ChessBoard {
     std::unordered_map<Position, Piece> board; 
 
     ChessBoard(std::vector<PieceConfig> pieceConfigs);
-    Position pieceFinder(std::string pieceType, std::string color = "all")
+    std::vector<Position> pieceFinder(std::string pieceType, std::string color = "all");
     bool movePiece(Position source, Position target);
     bool capturePiece(Position source, Position target);
     void printBoardStatus();
