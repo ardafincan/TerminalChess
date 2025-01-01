@@ -85,6 +85,7 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+/*
   // Print game settings
   auto settings = reader.getGameSettings();
   std::cout << "\n=== Game Settings ===\n";
@@ -103,22 +104,15 @@ int main(int argc, char* argv[]) {
   for (const auto& portal : reader.getPortalConfigs()) {
     printPortalConfig(portal);
   }
+*/
 
   ChessBoard gameBoard(reader.getPieceConfigs());
   GameManager gameManager(&gameBoard);
 
-  std::cout << "\n==== Chess Table ==== \n\n";
-  gameBoard.printBoardStatus();
 
   std::cout << "\n==== Chess Game ==== \n\n";
   gameManager.chessGame();
   std::cout << "\nGame Over!\n";
-
- //print all key value pairs in the board
-  // for (auto const& x : gameBoard.board) {
-  //   std::cout << "The key is: " << x.first.x << " " << x.first.y << " The value is: " << x.second.type << " " << x.second.color << std::endl;
-  // }
-  
 
   return 0;
 }

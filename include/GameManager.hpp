@@ -12,7 +12,6 @@ class GameManager {
     ChessBoard *chessBoard;
     
     void chessGame();
-    bool TurnProcessor();
     int whoWon();
 
     private:

@@ -12,6 +12,7 @@ class MoveValidator {
     bool isMoveValid(Position source, Position target);
     bool isPathValid(Position source, Position target);
     bool isTeleportValid();
+    bool isPossibleMove(Position source, Position target);
 
     private: 
         ChessBoard* board;
