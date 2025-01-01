@@ -43,7 +43,7 @@ bool MoveValidator::isPathValid(Position source, Position target){
             end_point = source.y;
             start_point = target.y;
         }
-        for(int i = start_point; i < end_point; i++){
+        for(int i = start_point+1; i < end_point; i++){
             Position checkPos;
             checkPos.x = source.x;
             checkPos.y = i;
@@ -61,7 +61,7 @@ bool MoveValidator::isPathValid(Position source, Position target){
             end_point = source.x;
             start_point = target.x;
         }
-        for(int i = start_point; i < end_point; i++){
+        for(int i = start_point+1; i < end_point; i++){
             Position checkPos;
             checkPos.x = i;
             checkPos.y = source.y;
@@ -72,7 +72,7 @@ bool MoveValidator::isPathValid(Position source, Position target){
     }
     if(side_diff == vertical_diff){
         if(target.x > source.x){
-            for(int i = 0; source.x + i < target.x; i++){
+            for(int i = 1; source.x + i < target.x; i++){
                 Position checkPos;
                 checkPos.x = source.x + i;
                 checkPos.y = source.y + i;
@@ -81,7 +81,7 @@ bool MoveValidator::isPathValid(Position source, Position target){
                 }
             }
         }else if(source.x > target.x){
-            for(int i = 0; target.x + i < source.x; i++){
+            for(int i = 1; target.x + i < source.x; i++){
                 Position checkPos;
                 checkPos.x = target.x + i;
                 checkPos.y = target.y + i;

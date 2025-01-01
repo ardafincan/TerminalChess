@@ -2,12 +2,6 @@
 
 #include "ChessBoard.hpp"
 
-struct move
-{
-    Position source;
-    Position target;
-};
-
 
 
 
@@ -22,5 +16,5 @@ class GameManager {
     int whoWon();
 
     private:
-    std::vector<move> moveHistory;
+    bool blackTurn = false;
 };

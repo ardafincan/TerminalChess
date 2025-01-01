@@ -113,6 +113,11 @@ int main(int argc, char* argv[]) {
   std::cout << "\n==== Chess Game ==== \n\n";
   gameManager.chessGame();
   std::cout << "\nGame Over!\n";
+
+ //print all key value pairs in the board
+  // for (auto const& x : gameBoard.board) {
+  //   std::cout << "The key is: " << x.first.x << " " << x.first.y << " The value is: " << x.second.type << " " << x.second.color << std::endl;
+  // }
   
 
   return 0;

@@ -59,4 +59,11 @@ run_fantasy: $(EXECUTABLE)
 	@printf "$(GREEN)Running the project with fantasy_chess.json...$(RESET)\n"
 	@./$(EXECUTABLE) data/fantasy_chess.json
 
+test: obj/ChessBoard.o obj/ConfigReader.o obj/GameManager.o obj/MoveValidator.o obj/main_test.o
+	$(CXX) -o bin/test obj/ChessBoard.o obj/ConfigReader.o obj/GameManager.o obj/MoveValidator.o obj/main_test.o -lgtest -lgtest_main -pthread
+	./bin/test
+
+obj/main_test.o: tests/main_test.cpp
+	$(CXX) $(CXXFLAGS) -Iinclude -Ithird_party/nlohmann -c tests/main_test.cpp -o obj/main_test.o
+
 .PHONY: all clean distclean run deps

@@ -19,23 +19,38 @@
     };
 
     bool ChessBoard::movePiece(Position source, Position target){
+        std::cout << "validator yapçam " << std::endl;
         MoveValidator validator(this);
         
-        if(!validator.isMoveValid(source, target) || !validator.isPathValid(source, target)){
+        std::cout << "path valid mi bakçam" << std::endl;
+        if(!validator.isPathValid(source, target)){
+            std::cout << "path valid değilmiş" << std::endl;
             return false;
         }
+        std::cout << "valid mi bakçam" << std::endl;
+        if(!validator.isMoveValid(source, target)){
+            std::cout << "valid değilmiş" << std::endl;
+            return false;
+        }
+        std::cout << "acaba??" << std::endl;
         if(!board.at(source).hasMoved){
+            std::cout << "hasmoved baktım" << std::endl;
             board.at(source).hasMoved = true;
         }
         //implement here if condition checking if source exists and target position is within chess board
         if(!board.contains(target)){
+            std::cout << "target boş mu baktım" << std::endl;
             board.insert(std::make_pair(target, board.at(source)));
             board.erase(source);
+            std::cout << "boşmuş hamle yaptım " << std::endl;
         }else if(board.at(target).color == board.at(source).color){
+            std::cout << "doluymuş aynı renk" << std::endl;
             return false;
         }else{
+            std::cout << "doluymuş yedim afiyet" << std::endl;
             ChessBoard::capturePiece(source, target);
         }
+        return true;
     };
 
     bool ChessBoard::capturePiece(Position source, Position target){
@@ -59,7 +74,7 @@
                     if (board.at(checkPos).type == "Pawn") {
                         if (board.at(checkPos).color == "White") {
                             std::cout << "P";
-                        } else {
+                        } else if(board.at(checkPos).color == "Black"){
                             std::cout << "p";
                         }
                     } else if (board.at(checkPos).type == "Rook") {
@@ -111,14 +126,14 @@
 
    std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color) {
     std::vector<Position> positions;
-    for(int i = 0; i < 7; i++) {
-        for(int j = 0; j < 7; j++) {
+    for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 8; j++) {
             Position position;
             position.x = j;
             position.y = i;
             
-            // Check if position exists in board before accessing
-            if(board.count(position) > 0) {  // or use board.contains(position)
+            if(board.count(position) > 0) {  
+                std::cout << position.x << position.y << board.at(position).type << board.at(position).color << std::endl;
                 if(color == "all") {
                     if(board.at(position).type == pieceType) {
                         positions.push_back(position);
@@ -132,5 +147,6 @@
             }
         }
     }
-    return positions;  // You were missing this return statement
+    std::cout << "finished" << std::endl;
+    return positions; 
 }
