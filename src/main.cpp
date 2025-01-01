@@ -6,6 +6,7 @@
 #include "ConfigReader.hpp"
 #include "ChessBoard.hpp"
 #include "MoveValidator.hpp"
+#include "GameManager.hpp"
 
 // Helper function to print positions
 void printPosition(const Position& pos) {
@@ -104,9 +105,15 @@ int main(int argc, char* argv[]) {
   }
 
   ChessBoard gameBoard(reader.getPieceConfigs());
+  GameManager gameManager(&gameBoard);
 
   std::cout << "\n==== Chess Table ==== \n\n";
   gameBoard.printBoardStatus();
+
+  std::cout << "\n==== Chess Game ==== \n\n";
+  gameManager.chessGame();
+  std::cout << "\nGame Over!\n";
+  
 
   return 0;
 }

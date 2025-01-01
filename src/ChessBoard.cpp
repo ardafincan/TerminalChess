@@ -109,22 +109,28 @@
         std::cout << "  0   1   2   3   4   5   6   7" << std::endl;
     };
 
-    std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color){
-        std::vector<Position> positions;
-        for(int i = 0; i < 7; i++){
-            for(int j = 0; j < 7; j++){
-                Position position;
-                position.x = j;
-                position.y = i;
-                if(color == "all"){
-                    if(board.at(position).type == pieceType){
+   std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color) {
+    std::vector<Position> positions;
+    for(int i = 0; i < 7; i++) {
+        for(int j = 0; j < 7; j++) {
+            Position position;
+            position.x = j;
+            position.y = i;
+            
+            // Check if position exists in board before accessing
+            if(board.count(position) > 0) {  // or use board.contains(position)
+                if(color == "all") {
+                    if(board.at(position).type == pieceType) {
                         positions.push_back(position);
                     }
-                }else{
-                    if(board.at(position).type == pieceType && board.at(position).color == color){
+                } else {
+                    if(board.at(position).type == pieceType && 
+                       board.at(position).color == color) {
                         positions.push_back(position);
                     }
                 }
             }
         }
-    };
+    }
+    return positions;  // You were missing this return statement
+}
