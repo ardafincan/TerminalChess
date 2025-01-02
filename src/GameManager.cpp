@@ -1,8 +1,9 @@
 #include "../include/GameManager.hpp"
 
-GameManager::GameManager(ChessBoard *board)
+GameManager::GameManager(ChessBoard *board, GameSettings *settings)
 {
     chessBoard = board;
+    gameSettings = settings;
 }
 
 int GameManager::whoWon()
@@ -22,11 +23,10 @@ int GameManager::whoWon()
 }
 
 void GameManager::chessGame()
-{
-    int anyWinner = whoWon();
-
-    while (anyWinner == 0)
+{   int turn = 0;
+    while (whoWon() == 0 && gameSettings->turn_limit > turn)
     {
+        turn++;
         chessBoard->printBoardStatus();
         Position source;
         Position target;
@@ -64,7 +64,7 @@ void GameManager::chessGame()
             }
         }
     }
-    if (anyWinner == 1)
+    if (whoWon() == 1)
     {
         std::cout << "Black wins!" << std::endl;
     }

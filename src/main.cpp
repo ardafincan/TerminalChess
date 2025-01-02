@@ -106,8 +106,10 @@ int main(int argc, char* argv[]) {
   }
 */
 
-  ChessBoard gameBoard(reader.getPieceConfigs());
-  GameManager gameManager(&gameBoard);
+  GameSettings settings = reader.getGameSettings();
+
+  ChessBoard gameBoard(reader.getPieceConfigs(), &settings);
+  GameManager gameManager(&gameBoard, &settings);
 
 
   std::cout << "\n==== Chess Game ==== \n\n";

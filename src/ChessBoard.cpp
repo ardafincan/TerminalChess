@@ -1,7 +1,8 @@
 #include "../include/ChessBoard.hpp"
 
-ChessBoard::ChessBoard(std::vector<PieceConfig> pieceConfigs)
+ChessBoard::ChessBoard(std::vector<PieceConfig> pieceConfigs, GameSettings *settings)
 {
+    gameSettings = settings;
 
     for (int j = 0; j < pieceConfigs.size(); j++)
     {
@@ -24,7 +25,8 @@ ChessBoard::ChessBoard(std::vector<PieceConfig> pieceConfigs)
 
 bool ChessBoard::movePiece(Position source, Position target)
 {
-    if(!board.contains(source)){
+    if (!board.contains(source))
+    {
         std::cout << "Invalid move, please move a valid piece." << std::endl;
         return false;
     }
@@ -48,14 +50,15 @@ bool ChessBoard::movePiece(Position source, Position target)
         board.insert(std::make_pair(target, board.at(source)));
         board.erase(source);
     }
-    // else if (board.at(target).color == board.at(source).color)
-    // {
-    //     return false;
-    // }
+    else if (board.at(target).color == board.at(source).color)
+    {
+        return false;
+    }
     else
     {
         ChessBoard::capturePiece(source, target);
     }
+    /*
     Position ourKing =  pieceFinder("King", color)[0];
     std::cout << ourKing.x << " " << ourKing.y << std::endl;
 
@@ -66,7 +69,7 @@ bool ChessBoard::movePiece(Position source, Position target)
         board.erase(target);
         std::cout << "Invalid move, your king being checked." << std::endl;
         return false;
-    }
+    }*/
     return true;
 };
 
@@ -79,16 +82,21 @@ bool ChessBoard::capturePiece(Position source, Position target)
 
 void ChessBoard::printBoardStatus()
 {
-    std::cout << "+---+---+---+---+---+---+---+---+" << std::endl;
-    for (int row = 7; row >= 0; row--)
+    std::cout << "+";
+    for(int k = 0; k < gameSettings->board_size; k++)
     {
-        // Print pieces row
+        std::cout << "---+";
+    }
+    std::cout << std::endl;
+    for (int row = gameSettings->board_size - 1; row >= 0; row--)
+    {
+
         std::cout << "|";
-        for (int col = 0; col < 8; col++)
+        for (int col = 0; col < gameSettings->board_size; col++)
         {
 
             std::cout << " ";
-            // Here you can add logic to print pieces
+
             Position checkPos;
             checkPos.x = col;
             checkPos.y = row;
@@ -168,15 +176,21 @@ void ChessBoard::printBoardStatus()
         }
         std::cout << " " << row << std::endl;
 
-        // Print horizontal border
-        std::cout << "+---+---+---+---+---+---+---+---+";
+        std::cout << "+";
+        for(int k = 0; k < gameSettings->board_size; k++)
+        {
+            std::cout << "---+";
+        }
         if (row > 0)
             std::cout << std::endl;
     }
 
-    // Print column labels
     std::cout << std::endl;
-    std::cout << "  0   1   2   3   4   5   6   7" << std::endl;
+    std::cout << "  " << "0";
+    for (int k = 1; k < gameSettings->board_size; k++)
+    {
+        std::cout << "   " << k;
+    }
 };
 
 std::vector<Position> ChessBoard::pieceFinder(std::string pieceType, std::string color)

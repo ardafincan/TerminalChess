@@ -1,7 +1,9 @@
 #include "../include/MoveValidator.hpp"
 
 MoveValidator::MoveValidator(ChessBoard *board)
-    : chessBoard(*board), board(board) {};
+    : chessBoard(*board), board(board) {
+        //this->portalSystem = portalSystem;
+    };
 
 bool MoveValidator::isMoveValid(Position source, Position target)
 {

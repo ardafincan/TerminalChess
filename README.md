@@ -37,13 +37,6 @@ Chess 2.0 is an advanced chess game that introduces new features and mechanics t
     ./bin/chess_game data/chess_pieces.json
     ```
 
-### Running Tests
-
-To run the tests, use the following command:
-```sh
-make test
-```
-
 ## Project Structure
 
 - `src/`: Contains the source code for the project.

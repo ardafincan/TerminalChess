@@ -2,6 +2,7 @@
 
 #include "ChessBoard.hpp"
 #include "ConfigReader.hpp"
+#include "PortalSystem.hpp"
 
 class ChessBoard;
 
@@ -17,4 +18,5 @@ class MoveValidator {
     private: 
         ChessBoard* board;
         ChessBoard& chessBoard;
+        //PortalSystem* portalSystem;
 };
