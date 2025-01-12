@@ -72,4 +72,5 @@ void GameManager::chessGame()
     {
         std::cout << "White wins!" << std::endl;
     };
+    chessBoard->printBoardStatus();
 }

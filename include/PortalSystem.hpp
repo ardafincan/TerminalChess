@@ -1,17 +1,17 @@
-#pragma once 
+// #pragma once 
 
-#include "ChessBoard.hpp"
+// #include "ChessBoard.hpp"
 
-class PortalSystem {
-    public:
-    explicit PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard* board);
+// class PortalSystem {
+//     public:
+//     explicit PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard* board);
 
-    std::unordered_map<Position, PortalConfig> portals;
+//     std::unordered_map<Position, PortalConfig> portals;
 
 
-    void teleportPiece(Position source, Position target);
+//     void teleportPiece(Position source, Position target);
 
-    private: 
-        ChessBoard* board;
-        ChessBoard& chessBoard;
-};
+//     private: 
+//         ChessBoard* board;
+//         ChessBoard& chessBoard;
+// };

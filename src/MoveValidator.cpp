@@ -10,7 +10,6 @@ bool MoveValidator::isMoveValid(Position source, Position target)
     int side_diff = abs(target.x - source.x);
     int vertical_diff = abs(target.y - source.y);
 
-    std::cout << "ilk adımmlar mı???" << chessBoard.board.at(source).hasMoved << std::endl;
     if (source.x == target.x)
     {
         if (!chessBoard.board.at(source).hasMoved && chessBoard.board.at(source).movement.first_move_forward >= vertical_diff)
