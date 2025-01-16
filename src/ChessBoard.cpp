@@ -54,7 +54,6 @@ bool ChessBoard::movePiece(Position source, Position target)
                 board.insert(std::make_pair(target, board.at(source)));
                 board.erase(source);
                 portalSystem->teleportPiece(target);
-                std::cout << "Teleport başarılı geçmiş olsun" << std::endl;
                 return true;
             }
             else if (board.at(target).color == board.at(source).color)
@@ -116,6 +115,9 @@ void ChessBoard::printBoardStatus()
         std::cout << "---+";
     }
     std::cout << std::endl;
+
+    std::vector<Position> portalExits;
+
     for (int row = gameSettings->board_size - 1; row >= 0; row--)
     {
 
@@ -128,78 +130,192 @@ void ChessBoard::printBoardStatus()
             Position checkPos;
             checkPos.x = col;
             checkPos.y = row;
+
             if (board.contains(checkPos))
             {
                 if (board.at(checkPos).type == "Pawn")
                 {
                     if (board.at(checkPos).color == "White")
                     {
-                        std::cout << "P";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "P" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "P" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[37m" << "P" << "\033[0m";
                     }
                     else if (board.at(checkPos).color == "Black")
                     {
-                        std::cout << "p";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "p" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "p" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[30m" << "p" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Rook")
                 {
                     if (board.at(checkPos).color == "White")
                     {
-                        std::cout << "R";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "R" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "R" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[37m" << "R" << "\033[0m";
                     }
                     else
                     {
-                        std::cout << "r";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "r" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "r" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[30m" << "r" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Knight")
                 {
                     if (board.at(checkPos).color == "White")
                     {
-                        std::cout << "N";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "N" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "N" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[37m" << "N" << "\033[0m";
                     }
                     else
                     {
-                        std::cout << "n";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "n" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "n" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[30m" << "n" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Bishop")
                 {
                     if (board.at(checkPos).color == "White")
                     {
-                        std::cout << "B";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "B" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "B" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[37m" << "B" << "\033[0m";
                     }
                     else
                     {
-                        std::cout << "b";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "b" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "b" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[30m" << "b" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Queen")
                 {
                     if (board.at(checkPos).color == "White")
                     {
-                        std::cout << "Q";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "Q" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "Q" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[37m" << "Q" << "\033[0m";
                     }
                     else
                     {
-                        std::cout << "q";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "q" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "q" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[30m" << "q" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "King")
                 {
                     if (board.at(checkPos).color == "White")
                     {
-                        std::cout << "K";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "K" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "K" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[37m" << "K" << "\033[0m";
                     }
                     else
                     {
-                        std::cout << "k";
+                        if (portalSystem->portals.contains(checkPos))
+                        {
+                            std::cout << "\033[32m" << "k" << "\033[0m";
+                        }
+                        else if (portalSystem->portalExits.contains(checkPos))
+                        {
+                            std::cout << "\033[31m" << "k" << "\033[0m";
+                        }
+                        else
+                            std::cout << "\033[1m\033[30m" << "k" << "\033[0m";
                     }
                 }
             }
             else if (portalSystem->portals.contains(checkPos))
             {
-                std::cout << "O";
+                portalExits.push_back(portalSystem->portals.at(checkPos).exit);
+                std::cout << "\033[32m" << "O" << "\033[0m";
+            }
+            else if (portalSystem->portalExits.contains(checkPos))
+            {
+                std::cout << "\033[31m" << "X" << "\033[0m";
             }
             else
                 std::cout << " ";

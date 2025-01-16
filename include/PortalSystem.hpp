@@ -25,6 +25,7 @@ public:
 
     ChessBoard *chessBoard;
 
+    std::unordered_map<Position, Portal> portalExits;
     std::unordered_map<Position, Portal> portals;
 
     bool isTeleportValid(Piece piece, Portal portal);
