@@ -1,6 +1,6 @@
 #include "../include/ChessBoard.hpp"
 
-ChessBoard::ChessBoard(std::vector<PieceConfig> pieceConfigs, GameSettings *settings)
+ChessBoard::ChessBoard(std::vector<PieceConfig> pieceConfigs, GameSettings *settings, PortalSystem *portalSystem)
 {
     gameSettings = settings;
 
@@ -43,13 +43,19 @@ bool ChessBoard::movePiece(Position source, Position target)
     }
     if (portalSystem->portals.contains(target))
     {
-        if (!portalSystem->isTeleportValid(board.at(source), portalSystem->portals.at(target)))
+        if (!portalSystem->isTeleportValid(board.at(source), portalSystem->portals.at(target)) && !board.contains(target))
         {
             std::cout << "You landed on a portal but you can not use this one." << std::endl;
-        }else{
+        }
+        else
+        {
             if (!board.contains(target))
             {
-                portalSystem->teleportPiece(source);
+                board.insert(std::make_pair(target, board.at(source)));
+                board.erase(source);
+                portalSystem->teleportPiece(target);
+                std::cout << "Teleport başarılı geçmiş olsun" << std::endl;
+                return true;
             }
             else if (board.at(target).color == board.at(source).color)
             {
@@ -62,7 +68,7 @@ bool ChessBoard::movePiece(Position source, Position target)
             }
         }
     }
-    //target portal mı diye bak
+    // target portal mı diye bak
     if (!board.at(source).hasMoved)
     {
         board.at(source).hasMoved = true;
@@ -105,7 +111,7 @@ bool ChessBoard::capturePiece(Position source, Position target)
 void ChessBoard::printBoardStatus()
 {
     std::cout << "+";
-    for(int k = 0; k < gameSettings->board_size; k++)
+    for (int k = 0; k < gameSettings->board_size; k++)
     {
         std::cout << "---+";
     }
@@ -191,6 +197,10 @@ void ChessBoard::printBoardStatus()
                     }
                 }
             }
+            else if (portalSystem->portals.contains(checkPos))
+            {
+                std::cout << "O";
+            }
             else
                 std::cout << " ";
             std::cout << " ";
@@ -199,7 +209,7 @@ void ChessBoard::printBoardStatus()
         std::cout << " " << row << std::endl;
 
         std::cout << "+";
-        for(int k = 0; k < gameSettings->board_size; k++)
+        for (int k = 0; k < gameSettings->board_size; k++)
         {
             std::cout << "---+";
         }

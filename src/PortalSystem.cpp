@@ -1,7 +1,8 @@
 #include <PortalSystem.hpp>
 #include "ChessBoard.hpp"
 
-PortalSystem::PortalSystem(std::vector<PortalConfig> portalConfigs)
+PortalSystem::PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard *chessBoard)
+    : chessBoard(chessBoard)
 {
     for (int i = 0; i < portalConfigs.size(); i++)
     {
@@ -17,22 +18,33 @@ PortalSystem::PortalSystem(std::vector<PortalConfig> portalConfigs)
 
 bool PortalSystem::isTeleportValid(Piece piece, Portal portal)
 {
-    if ((piece.color == portal.allowed_colors[0] || piece.color == portal.allowed_colors[1]) && portal.isCool)
+    std::cout << "Checking if teleport is valid" << std::endl;
+    for (int i = 0; i < portal.allowed_colors.size(); i++)
     {
-        return true;
+        if (piece.color == portal.allowed_colors[i] && portal.isCool)
+        {
+            return true;
+        }
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void PortalSystem::teleportPiece(Position source)
 {
-    Position target = portals.at(source).exit;
-    if (isTeleportValid(chessBoard->board.at(source), portals.at(source)))
+    Position target;
+    if (portals.contains(source))
     {
-        chessBoard->board.at(target) = chessBoard->board.at(target);
-        chessBoard->board.at(target);
+        target = portals.at(source).exit;
+    }
+    if (chessBoard)
+    {
+        if (chessBoard->board.contains(source))
+        {
+            if (isTeleportValid(chessBoard->board.at(source), portals.at(source)))
+            {
+                chessBoard->board.insert(std::make_pair(target, chessBoard->board.at(source)));
+                chessBoard->board.erase(source);
+            }
+        }
     }
 }

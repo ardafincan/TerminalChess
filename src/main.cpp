@@ -108,7 +108,12 @@ int main(int argc, char* argv[]) {
 
   GameSettings settings = reader.getGameSettings();
 
-  ChessBoard gameBoard(reader.getPieceConfigs(), &settings);
+  PortalSystem* portalSystem = nullptr;
+  ChessBoard gameBoard(reader.getPieceConfigs(), &settings, portalSystem);
+
+  portalSystem = new PortalSystem(reader.getPortalConfigs(), &gameBoard);
+  gameBoard.portalSystem = portalSystem;
+
   GameManager gameManager(&gameBoard, &settings);
 
 

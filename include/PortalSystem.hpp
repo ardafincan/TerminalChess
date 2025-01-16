@@ -5,10 +5,10 @@
 #include <iostream>
 #include <string>
 #include "ChessBoard.hpp"
-#include "ConfigReader.hpp"
+#include "ConfigReader.hpp"  
 
-class ChessBoard; 
-struct Piece;   
+class ChessBoard;
+struct Piece;
 
 struct Portal
 {
@@ -21,7 +21,7 @@ struct Portal
 class PortalSystem
 {
 public:
-    explicit PortalSystem(std::vector<PortalConfig> portalConfigs);
+    explicit PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard *chessBoard);
 
     ChessBoard *chessBoard;
 

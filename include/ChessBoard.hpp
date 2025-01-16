@@ -21,7 +21,7 @@ struct Piece
 class ChessBoard
 {
 public:
-    ChessBoard(std::vector<PieceConfig> pieceConfigs, GameSettings *settings);
+    ChessBoard(std::vector<PieceConfig> pieceConfigs, GameSettings *settings, PortalSystem *portalSystem);
 
     std::unordered_map<Position, Piece> board;
     GameSettings *gameSettings;
