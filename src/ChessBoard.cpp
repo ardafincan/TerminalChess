@@ -41,6 +41,28 @@ bool ChessBoard::movePiece(Position source, Position target)
     {
         return false;
     }
+    if (portalSystem->portals.contains(target))
+    {
+        if (!portalSystem->isTeleportValid(board.at(source), portalSystem->portals.at(target)))
+        {
+            std::cout << "You landed on a portal but you can not use this one." << std::endl;
+        }else{
+            if (!board.contains(target))
+            {
+                portalSystem->teleportPiece(source);
+            }
+            else if (board.at(target).color == board.at(source).color)
+            {
+                std::cout << "Invalid move, you can not teleport there." << std::endl;
+                return false;
+            }
+            else
+            {
+                ChessBoard::capturePiece(source, target);
+            }
+        }
+    }
+    //target portal mı diye bak
     if (!board.at(source).hasMoved)
     {
         board.at(source).hasMoved = true;

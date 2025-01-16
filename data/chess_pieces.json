@@ -125,7 +125,7 @@
       },
       "properties": {
         "preserve_direction": true,
-        "allowed_colors": ["white", "black"],
+        "allowed_colors": ["White", "Black"],
         "cooldown": 1
       }
     },
@@ -138,7 +138,7 @@
       },
       "properties": {
         "preserve_direction": false,
-        "allowed_colors": ["white"],
+        "allowed_colors": ["White"],
         "cooldown": 2
       }
     }

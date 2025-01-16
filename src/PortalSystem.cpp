@@ -1,27 +1,38 @@
-// #include <PortalSystem.hpp>
+#include <PortalSystem.hpp>
+#include "ChessBoard.hpp"
 
-// PortalSystem::PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard *board)
-//     : chessBoard(*board), board(board)
-// {
-//     for (int i = 0; i < portalConfigs.size(); i++)
-//     {
-//         PortalConfig portalConfig = portalConfigs[i];
-//         portals.insert(std::make_pair(portalConfig.positions.entry, portalConfig));
-//     }
-// };
+PortalSystem::PortalSystem(std::vector<PortalConfig> portalConfigs)
+{
+    for (int i = 0; i < portalConfigs.size(); i++)
+    {
+        PortalConfig portalConfig = portalConfigs[i];
+        Portal portal;
+        portal.entry = portalConfig.positions.entry;
+        portal.exit = portalConfig.positions.exit;
+        portal.allowed_colors = portalConfig.properties.allowed_colors;
+        portal.isCool = true;
+        portals.insert(std::make_pair(portalConfig.positions.entry, portal));
+    }
+};
 
+bool PortalSystem::isTeleportValid(Piece piece, Portal portal)
+{
+    if ((piece.color == portal.allowed_colors[0] || piece.color == portal.allowed_colors[1]) && portal.isCool)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
-// // void PortalSystem::teleportPiece(Position source, Position target)
-// // {
-// //     if (portals.contains(source) && portals.contains(target) && validator.isTeleportValid())
-// //     {
-// //         if (portals.at(source).properties.allowed_colors.contains(chessBoard.board.at(source).color))
-// //         {
-// //             chessBoard.board.insert(std::make_pair(target, chessBoard.board.at(source)));
-// //             chessBoard.board.erase(source);
-// //         }else{
-// //             std::cout << "Invalid move, piece cannot be teleported." << std::endl;
-// //         }
-// //     }
-
-// // }
+void PortalSystem::teleportPiece(Position source)
+{
+    Position target = portals.at(source).exit;
+    if (isTeleportValid(chessBoard->board.at(source), portals.at(source)))
+    {
+        chessBoard->board.at(target) = chessBoard->board.at(target);
+        chessBoard->board.at(target);
+    }
+}

@@ -1,17 +1,32 @@
-// #pragma once 
+#pragma once
 
-// #include "ChessBoard.hpp"
+#include <vector>
+#include <unordered_map>
+#include <iostream>
+#include <string>
+#include "ChessBoard.hpp"
+#include "ConfigReader.hpp"
 
-// class PortalSystem {
-//     public:
-//     explicit PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard* board);
+class ChessBoard; 
+struct Piece;   
 
-//     std::unordered_map<Position, PortalConfig> portals;
+struct Portal
+{
+    Position entry;
+    Position exit;
+    std::vector<std::string> allowed_colors;
+    bool isCool;
+};
 
+class PortalSystem
+{
+public:
+    explicit PortalSystem(std::vector<PortalConfig> portalConfigs);
 
-//     void teleportPiece(Position source, Position target);
+    ChessBoard *chessBoard;
 
-//     private: 
-//         ChessBoard* board;
-//         ChessBoard& chessBoard;
-// };
+    std::unordered_map<Position, Portal> portals;
+
+    bool isTeleportValid(Piece piece, Portal portal);
+    void teleportPiece(Position source);
+};
