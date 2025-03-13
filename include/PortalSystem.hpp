@@ -16,6 +16,7 @@ struct Portal
     Position exit;
     std::vector<std::string> allowed_colors;
     bool isCool;
+    std::string id;
 };
 
 class PortalSystem

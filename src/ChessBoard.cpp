@@ -159,7 +159,7 @@ void ChessBoard::printBoardStatus()
                             std::cout << "\033[31m" << "p" << "\033[0m";
                         }
                         else
-                            std::cout << "\033[1m\033[30m" << "p" << "\033[0m";
+                            std::cout << "\033[1m\033[35m" << "p" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Rook")
@@ -188,7 +188,7 @@ void ChessBoard::printBoardStatus()
                             std::cout << "\033[31m" << "r" << "\033[0m";
                         }
                         else
-                            std::cout << "\033[1m\033[30m" << "r" << "\033[0m";
+                            std::cout << "\033[1m\033[35m" << "r" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Knight")
@@ -217,7 +217,7 @@ void ChessBoard::printBoardStatus()
                             std::cout << "\033[31m" << "n" << "\033[0m";
                         }
                         else
-                            std::cout << "\033[1m\033[30m" << "n" << "\033[0m";
+                            std::cout << "\033[1m\033[35m" << "n" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Bishop")
@@ -246,7 +246,7 @@ void ChessBoard::printBoardStatus()
                             std::cout << "\033[31m" << "b" << "\033[0m";
                         }
                         else
-                            std::cout << "\033[1m\033[30m" << "b" << "\033[0m";
+                            std::cout << "\033[1m\033[35m" << "b" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "Queen")
@@ -275,7 +275,7 @@ void ChessBoard::printBoardStatus()
                             std::cout << "\033[31m" << "q" << "\033[0m";
                         }
                         else
-                            std::cout << "\033[1m\033[30m" << "q" << "\033[0m";
+                            std::cout << "\033[1m\033[35m" << "q" << "\033[0m";
                     }
                 }
                 else if (board.at(checkPos).type == "King")
@@ -304,18 +304,18 @@ void ChessBoard::printBoardStatus()
                             std::cout << "\033[31m" << "k" << "\033[0m";
                         }
                         else
-                            std::cout << "\033[1m\033[30m" << "k" << "\033[0m";
+                            std::cout << "\033[1m\033[35m" << "k" << "\033[0m";
                     }
                 }
             }
             else if (portalSystem->portals.contains(checkPos))
             {
                 portalExits.push_back(portalSystem->portals.at(checkPos).exit);
-                std::cout << "\033[32m" << "O" << "\033[0m";
+                std::cout << "\033[32m" << portalSystem->portals.at(checkPos).id << "\033[0m";
             }
             else if (portalSystem->portalExits.contains(checkPos))
             {
-                std::cout << "\033[31m" << "X" << "\033[0m";
+                std::cout << "\033[31m" << portalSystem->portalExits.at(checkPos).id << "\033[0m";
             }
             else
                 std::cout << " ";

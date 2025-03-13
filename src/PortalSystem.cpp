@@ -12,6 +12,7 @@ PortalSystem::PortalSystem(std::vector<PortalConfig> portalConfigs, ChessBoard *
         portal.exit = portalConfig.positions.exit;
         portal.allowed_colors = portalConfig.properties.allowed_colors;
         portal.isCool = true;
+        portal.id = portalConfig.id.back();
         portals.insert(std::make_pair(portalConfig.positions.entry, portal));
         portalExits.insert(std::make_pair(portalConfig.positions.exit, portal));
     }
