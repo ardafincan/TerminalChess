@@ -2,7 +2,9 @@
 
 ## Overview
 
-Chess 2.0 is an advanced chess game that introduces new features and mechanics to the traditional game of chess. This project includes a custom chessboard, unique piece configurations, and special portal mechanics to enhance the gameplay experience.
+Chess 2.0 is an advanced chess game that introduces new features and mechanics to the traditional game of chess. This project includes a custom chessboard, unique piece configurations, and special portal mechanics to enhance the gameplay experience. 
+
+### **You win by capturing opponents king!**
 
 ## Features
 
